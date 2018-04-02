@@ -1,0 +1,35 @@
+/*colors.css*/
+
+.bg-menu  { background-color: #ffecb3; }
+.bg-logo { background-color: #f4d03f; }
+.icon-bar { background-color: white; }
+.middle-color {background-color: #f4d03f;}
+#footer-ico { background-color: #ffdf80}
+#footer-dev { background-color: #f4d03f}
+
+/*fa-colors*/
+
+.fa-facebook {
+    background: #3b5998;
+    color: white;
+}
+
+.fa-youtube {
+	background: #bb0000;
+	color: white;
+}
+
+.fa-twitter {
+	background: #55acee;
+	color: white;
+}
+
+.fa-google {
+	background: #dd4b39;
+	color: white;
+}
+
+.fa-linkedin {
+	background: #007bb5;
+	color: white;
+}

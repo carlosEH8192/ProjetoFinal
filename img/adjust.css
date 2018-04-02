@@ -1,0 +1,100 @@
+/*adjust.css*/
+
+/*NAV*/
+#infLogo {
+	text-align: center;
+}
+
+.brand {
+	vertical-align: middle;
+	position: relative;
+	bottom: 4px;
+}
+
+#alcidesmaya-logo {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+
+}
+
+#nav-logo {
+	margin-left: auto;
+	margin-right: auto;
+	
+	margin-bottom: 0;
+	height: 70px;
+}
+
+.mg-bt {
+	margin-bottom: 0;
+}
+
+/*IMG THUMB*/
+#thumb-row {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#img-thumb-1, #img-thumb-2, #img-thumb-3, #img-thumb-4 {
+	padding-right: 0;
+    padding-left: 0;
+}
+
+/*HOVER THUMB*/
+.img-hover {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.row-hover:hover .img-hover {
+  /*filter: blur(5px);*/
+  opacity: 0.3;
+}
+
+.row-hover:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  color: black;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
+/*FOOTER*/
+.social-icon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  text-align: center;
+
+}
+
+.fa {
+    padding: 12px;
+    font-size: 40px;
+    width: 38px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

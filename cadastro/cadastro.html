@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../img/adjust.css" />
+    <link rel="stylesheet" href="../colors/colors.css" />
+    <link rel="stylesheet" href="../forms_css/index.css" />
+</head>
+<body background="../img/background.png">
+    <?php
+        include_once("../defaultNavs/cb_nav.html");
+    ?>
+
+    <div class="container-fluid">
+        <h1 class="col-sm-12">Cadastro</h1>
+
+        <form action="update_conta.php" method="post" class="form-horizontal">
+            <!-- NOME COMPLETO -->
+            <div class="form-group">
+                <label for="inp-nome-completo"
+                        class="col-sm-2 control-label">
+                    Nome completo: 
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control"
+                            id="inp-nome-completo" name="nome-completo"
+                            placeholder="Nome Completo" required
+                            autofocus />
+                </div>
+            </div>
+
+            <!-- SEXO -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    Sexo: 
+                </label>
+                <div class="col-sm-3">
+                    <label class="radio-inline">
+                        <input type="radio" id="radio-m"
+                                name="sexo" value="M" required />
+                        Masculino
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" id="radio-f"
+                                name="sexo" value="F" required />
+                        Feminino
+                    </label>
+                </div>
+            </div>
+
+            <!-- TELEFONE CELULAR -->
+            <div class="form-group">
+                <label for="inp-celular"
+                        class="col-sm-2 control-label">
+                    Telefone Celular: 
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control"
+                            id="inp-celular" name="celular"
+                            placeholder="Telefone Celular" required />
+                </div>
+            </div>
+
+            <!-- TELEFONE FIXO -->
+            <div class="form-group">
+                <label for="inp-fixo"
+                        class="col-sm-2 control-label">
+                    Telefone Fixo: 
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control"
+                            id="inp-fixo" name="fixo"
+                            placeholder="Telefone Fixo" required />
+                </div>
+            </div>
+
+            <!-- RG -->
+            <div class="form-group">
+                <label for="inp-rg"
+                        class="col-sm-2 control-label">
+                   RG: 
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control"
+                            id="inp-rg" name="rg"
+                            readonly required
+                            placeholder="RG" />
+                </div>
+            </div>
+
+            <!-- CPF -->
+            <div class="form-group">
+                <label for="inp-cpf"
+                        class="col-sm-2 control-label">
+                   CPF: 
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control"
+                            id="inp-cpf" name="cpf"
+                            readonly required
+                            placeholder="CPF" />
+                </div>
+            </div>
+
+            <!-- E-MAIL -->
+            <div class="form-group">
+                <label for="inp-email"
+                        class="col-sm-2 control-label">
+                    E-mail: 
+                </label>
+                <div class="col-sm-3">
+                    <input type="email" class="form-control"
+                            id="inp-email" name="email"
+                            placeholder="E-mail" required />
+                </div>
+            </div>
+
+            <!-- SENHA -->
+            <div class="form-group">
+                <label for="inp-senha"
+                        class="col-sm-2 control-label">
+                    Senha: 
+                </label>
+                <div class="col-sm-3">
+                    <input type="password" class="form-control"
+                            id="inp-senha" name="senha"
+                            placeholder="Senha" required />
+                </div>
+            </div>
+
+            <!-- SUBMIT -->
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-3">
+                    <input type="submit" class="btn btn-default"
+                            name="submit" value="Cadastrar"
+                            required />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="../bootstrap/jquery/jquery.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+        function getDadosAluno() {
+            $.post("get_dados_aluno.php", preencheCampos);
+        }
+
+        function preencheCampos(data) {
+            var aluno = JSON.parse(data);
+
+            $("#inp-nome-completo").val(aluno.nomeCompleto);
+            aluno.sexo == "M" ? $("#radio-m").prop("checked", true) :
+                                $("#radio-f").prop("checked", true);
+
+            $("#inp-celular").val(aluno.telefoneCelular);
+            $("#inp-fixo").val(aluno.telefoneFixo);
+            $("#inp-rg").val(aluno.rg);
+            $("#inp-cpf").val(aluno.cpf);
+            $("#inp-email").val(aluno.email);
+            $("#inp-senha").val(aluno.senha);
+        }
+
+        $(document).ready(getDadosAluno);
+    </script>
+</body>
+</html>
