@@ -1,13 +1,9 @@
-article { margin-left: 30px; }
+h2         { margin-bottom: 17px; }
+.mg-bot    { margin-bottom: 27px; }
+#missao-p1 { font-weight: bold; }
 
-p {
-	max-width: 790px;
-    margin: 13px 0 30px 25px;
-	
-	font-size: 16px;
-	text-align: justify;
-	line-height: 28px;
+.p-generico {
+    font-size: 16px;
+    text-align: justify;
+    line-height: 28px;
 }
-
-.p-mginfdef { margin-bottom: 30px }
-.p-mginf0 { margin-bottom: 0; }

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
     <title>Alcides Maya</title>
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../img/adjust.css" />
     <link rel="stylesheet" href="../colors/colors.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../defaultCss/overflow_y.css" />
+    <link rel="stylesheet" href="index.css" />
 </head>
 <body background="../img/background.png">
     <?php
@@ -15,36 +17,43 @@
     ?>
 
     <div class="container-fluid">
-        <h1>Quem Somos</h1>
-        
-        <article>
-            <h3>ALCIDES MAYA - APAIXONADOS POR DESIGN</h3>
-            <p>
-                Somos uma escola de design voltada para o ensino na prática.
-                Criamos o método de Ensino 4.0®, um cenário para ensinar
-                design e auxiliar a geração de negócios para os alunos.
-            </p>
-            <p>
-                Proporcionamos experiências de aprendizagem onde o aluno fica 
-                preparado para o mercado de trabalho. Entendemos que há uma grande
-                importância no conteúdo ensinado, e aprender com a prática é a
-                melhor maneira de promover o crescimento.
-            </p>
+        <h2>Quem Somos</h2>
+        <div class="container-fluid">
+            <div class="col-sm-8">
+                <section id="quem-somos">
+                    <p class="p-generico">
+                        Somos uma escola de design voltada para o ensino na prática.
+                        Criamos o método de Ensino 4.0®, um cenário para ensinar
+                        design e auxiliar a geração de negócios para os alunos.
+                    </p>
+                    <p class="p-generico">
+                        Proporcionamos experiências de aprendizagem onde o aluno fica 
+                        preparado para o mercado de trabalho. Entendemos que há uma grande
+                        importância no conteúdo ensinado, e aprender com a prática é a
+                        melhor maneira de promover o crescimento.
+                    </p>
+                </section>
+            </div>
+        </div>
 
-            <h4>Missão</h4>
-            <p>
-                COMPARTILHAR CONTEÚDOS E PROPORCIONAR EXPERIÊNCIAS EM DESIGN.
-            </p>
-            <p>
-                Oferecemos a interação entre alunos, professores, profissionais,
-                empresas até o consumidor final, facilitando a compreensão dos
-                processos de desenvolvimento, criação e execução de projetos em
-                design. Esse método dinâmico de adequação ao cenário atual é
-                a essência do Alcides Maya.
-            </p>
-        </article>
+        <h2>Missão</h2>
+        <div class="container-fluid">
+            <div class="col-sm-8">
+                <section id="missao">
+                    <p class="p-generico" id="missao-p1">
+                        Compartilhar conteúdos e proporcionar experiências em design.
+                    </p>
+                    <p class="p-generico">
+                        Oferecemos a interação entre alunos, professores, profissionais,
+                        empresas até o consumidor final, facilitando a compreensão dos
+                        processos de desenvolvimento, criação e execução de projetos em
+                        design. Esse método dinâmico de adequação ao cenário atual é
+                        a essência do Alcides Maya.
+                    </p>
+                </section>
+            </div>
+        </div>
     </div>
-
 
     <?php
         include_once("../defaultNavs/ft_nav.html");
