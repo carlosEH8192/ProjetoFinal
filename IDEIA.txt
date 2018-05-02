@@ -1,2 +1,1 @@
 Logo alcides com animação na esfera (girar na linha do vetor) P/ Loading;
-Isolar código html nav padrão em um arquivo PHP para melhor manutenção;
