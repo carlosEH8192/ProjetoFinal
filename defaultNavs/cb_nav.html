@@ -22,34 +22,50 @@
                 <!-- NAVBAR INÍCIO, CURSOS DROPDOWN, QUEM SOMOS, CONTATO E CADASTRO -->
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/ProjetoFinalGit/index.php">Início</a>
+                        <a href="<?= $inicio; ?>">Início</a>
                     </li>
                     <li class="dropdown">
                         <a href="#"
-                            class="dropdown-toggle"
-                            data-toggle="dropdown" role="button"
-                            aria-haspopup="true" aria-expanded="false">
+                           class="dropdown-toggle"
+                           data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">
                             Cursos <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/ProjetoFinalGit/cursos/photoshop/index.php">Adobe Photoshop</a></li>
-                            <li><a href="/ProjetoFinalGit/cursos/corelDraw/index.php">Corel Draw</a></li>
-                            <li><a href="/ProjetoFinalGit/cursos/3dsMax/index.php">3ds Max</a></li>
-                            <li><a href="/ProjetoFinalGit/cursos/informaticaBasica/index.php">Informática Básica</a></li>
+                            <li>
+                                <a href="<?= $photoshop; ?>">
+                                    Adobe Photoshop
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= $corel; ?>">
+                                    Corel Draw
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= $dsMax; ?>">
+                                    3ds Max
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= $inf_bsc; ?>">
+                                    Informática Básica
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="/ProjetoFinalGit/quemSomos/index.php">
+                        <a href="<?= $quemSomos; ?>">
                             Quem Somos
                         </a>
                     </li>
                     <li>
-                        <a href="/ProjetoFinalGit/contato/index.php">
+                        <a href="<?= $contato; ?>">
                             Contato
                         </a>
                     </li>
                     <li>
-                        <a href="/ProjetoFinalGit/cadastro/index.php">
+                        <a href="<?= $cadastro; ?>">
                             Cadastro
                         </a>
                     </li>
@@ -58,7 +74,7 @@
                 <!-- NAVBAR LOGIN -->
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/ProjetoFinalGit/login/index.php">
+                        <a href="<?= $login; ?>">
                             <span class="glyphicon glyphicon-user"></span>
                             &nbsp;Login
                         </a>
