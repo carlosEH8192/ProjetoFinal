@@ -1,5 +1,5 @@
 <?php // => /defaultNavs/cb_nav.php
-	$root = "/htdocs/ProjetoFinalGit";
+	$root = "/ProjetoFinalGit";
 	$inicio = $root."/index.php";
 	$cursos = $root."/cursos";
 	
