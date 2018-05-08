@@ -1,6 +1,9 @@
 <?php // => /contato/envia_email.php
     $to = "Carlos Eduardo <carloseh.355@gmail.com>";
     
+
+     printf($_POST["nome-completo"]);
+
     $nome_completo_cliente = $_POST["nome-completo"];
     $email_cliente = $_POST["email"];
     $assunto = $_POST["assunto"];
@@ -13,5 +16,5 @@
                 "X-Mailer: PHP/".phpversion()."\r\n";
 
     $resultado = mail($to, $assunto, $mensagem, $headers);
-    var_dump($resultado);
+    print($resultado);
 ?>

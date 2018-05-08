@@ -1,5 +1,5 @@
 function getDadosAluno() {
-    $.post("get_dados_aluno.php", preencheCampos);
+    $.get("get_dados_aluno.php", preencheCampos);
 }
 
 function preencheCampos(data) {

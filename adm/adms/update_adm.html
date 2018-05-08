@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Alcides Maya</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../img/adjust.css" />
+    <link rel="stylesheet" href="../../colors/colors.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body background="../../img/background.png">
+    <!-- CABEÇALHO ADM (ISOLADO EM PHP) -->
+    <?php
+        include_once($iface_cb_nav_adm);
+    ?>
+
+    <div class="container-fluid">
+        <h1 class="col-md-12">Editar Administrador</h1>
+
+        <form class="form-horizontal" method="post" onsubmit="return updateAdm(this, event)">
+            <!-- USERNAME -->
+            <div class="form-group">
+                <label for="inp-username" class="col-sm-2 control-label">
+                    Username: 
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control"
+                            id="inp-username" name="username"
+                            placeholder="Username" required
+                            autofocus />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inp-senha" class="col-sm-2 control-label">
+                    Senha
+                </label>
+                <div class="col-sm-3">
+                    <input type="password" class="form-control"
+                            id="inp-senha" name="senha"
+                            placeholder="Senha" required />
+                </div>
+            </div>
+
+            <!-- SUBMIT -->
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-3">
+                    <input type="submit" class="btn btn-default"
+                            name="submit" value="Salvar"
+                            required />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="../../bootstrap/jquery/jquery.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+        var codigo = location.search.split('codigo=')[1];
+
+        function fazRequisicaoGet(codigo) {
+            $.get('get_adm_adms.php', { codigo: codigo }, function(dadosAdm) {                
+                var dadosJson = JSON.parse(dadosAdm);
+                $("#inp-username").val(dadosJson.username);
+            });
+        }
+
+        function updateAdm(form, ev) {
+            ev.preventDefault();
+
+            var username = $("#inp-username").val();
+            var senha = $("#inp-senha").val();
+
+            $.post(
+                "update_adm_script.php",
+                { codigo: codigo, username: username, senha: senha },
+                trataResposta
+            );
+        }
+
+        function trataResposta(retorno) {
+            if(retorno == '1') {
+                alert("Conta atualizada com Sucesso!");
+                document.forms[0].reset();
+                window.location.href = 'index.php';
+
+            } else
+                alert("Erro ao atualizar Conta! Por favor, tente atualizar mais tarde.");
+        }
+
+        $(function() {
+            fazRequisicaoGet(codigo);
+        });
+    </script>
+</body>
+</html>

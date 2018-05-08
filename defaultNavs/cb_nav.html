@@ -1,6 +1,7 @@
 <nav class="navbar bg-logo" id="nav-logo"> 
         <div class="container-fluid">
-            <img class="img-responsive" id="alcidesmaya-logo" src="/ProjetoFinalGit/img/logo/cb-am.png" alt="alcidesmaya">
+            <img class="img-responsive" id="alcidesmaya-logo"
+                 src="<?= CB_LOGO; ?>" alt="alcidesmaya" />
         </div>
     </nav>
     <nav class="navbar bg-menu mg-bt">
@@ -22,7 +23,7 @@
                 <!-- NAVBAR INÍCIO, CURSOS DROPDOWN, QUEM SOMOS, CONTATO E CADASTRO -->
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="<?= $inicio; ?>">Início</a>
+                        <a href="<?= INICIO; ?>">Início</a>
                     </li>
                     <li class="dropdown">
                         <a href="#"
@@ -33,39 +34,39 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="<?= $photoshop; ?>">
+                                <a href="<?= PHOTOSHOP; ?>">
                                     Adobe Photoshop
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= $corel; ?>">
+                                <a href="<?= COREL; ?>">
                                     Corel Draw
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= $dsMax; ?>">
+                                <a href="<?= DSMAX; ?>">
                                     3ds Max
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= $inf_bsc; ?>">
+                                <a href="<?= INF_BSC; ?>">
                                     Informática Básica
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="<?= $quemSomos; ?>">
+                        <a href="<?= QUEMSOMOS; ?>">
                             Quem Somos
                         </a>
                     </li>
                     <li>
-                        <a href="<?= $contato; ?>">
+                        <a href="<?= CONTATO; ?>">
                             Contato
                         </a>
                     </li>
                     <li>
-                        <a href="<?= $cadastro; ?>">
+                        <a href="<?= CADASTRO; ?>">
                             Cadastro
                         </a>
                     </li>
@@ -73,12 +74,12 @@
 
                 <!-- NAVBAR LOGIN -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="<?= $login; ?>">
-                            <span class="glyphicon glyphicon-user"></span>
-                            &nbsp;Login
-                        </a>
-                    </li>
+                    <?php
+                        $validacao_existe_eh_aluno ?
+                            include_once($logged_in_nav) :
+                            include_once($def_login_nav);
+                    ?>
+
                 </ul>
             </div><!-- .navbar-collapse -->
         </div><!-- .container-fluid -->

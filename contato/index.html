@@ -20,7 +20,7 @@
     <div class="container-fluid">
         <h1 class="col-sm-12">Envie-nos uma mensagem</h1>
 
-        <form action="envia_email.php" method="post" class="form-horizontal">
+        <form class="form-horizontal" onsubmit="return enviaContato(this)" method="post">
             <!-- NOME COMPLETO -->
             <div class="form-group">
                 <label for="inp-nome-completo"
@@ -78,7 +78,7 @@
             <!-- SUBMIT -->
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-3">
-                    <input type="submit" class="btn btn-default"
+                    <input type="submit" class="btn btn-default" id="btn-submit"
                             name="submit" value="Enviar" />
                 </div>
             </div>
@@ -91,5 +91,6 @@
 
     <script src="../bootstrap/jquery/jquery.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="contato.js"></script>
 </body>
 </html>
