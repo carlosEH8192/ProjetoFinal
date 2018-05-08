@@ -1,4 +1,4 @@
-<?php // => /adm/adms/insere_adm_script.php
+<?php // => /adm/alunos/insere_aluno_script.php
     set_include_path("C:/htdocs");
     
     include_once("ProjetoFinalGit/deus/Deus.php");
