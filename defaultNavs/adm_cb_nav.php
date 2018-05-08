@@ -6,6 +6,7 @@
     $username = $_SESSION["username"];
     $gestao_adms = ROOT."/adm/adms/index.php";
     $gestao_alunos = ROOT."/adm/alunos/index.php";
+    $gestao_cursos = ROOT."/adm/cursos/index.php";
 
     include_once("adm_cb_nav.html");
 ?>
