@@ -181,11 +181,10 @@
             var senha = $('#inp-senha').val();
 
             $.post("update_aluno_script.php", {
-                    codigo: codigo, nomeCompleto: nomeCompleto, sexo: sexo,
-                    celular: celular, fixo: fixo, rg: rg,
-                    cpf: cpf, email: email, senha: senha
-                }, trataResposta
-            );
+                codigo: codigo, nomeCompleto: nomeCompleto, sexo: sexo,
+                celular: celular, fixo: fixo, rg: rg,
+                cpf: cpf, email: email, senha: senha
+            }, trataResposta);
         }
 
         function trataResposta(retorno) {

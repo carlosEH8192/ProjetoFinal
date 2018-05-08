@@ -19,7 +19,7 @@
         <h1 class="col-md-12">Consulta de Alunos</h1>
 
         <div class="col-md-12">
-            <a class="btn btn-primary" href="insere_adm.php">Novo Aluno</a>
+            <a class="btn btn-primary" href="insere_aluno.php">Novo Aluno</a>
         </div>
 
         <div class="col-md-12">
@@ -94,12 +94,12 @@
             tbl$.find('tbody').html(html);
         }
 
-        // function deletaAluno(codigo) {
-        //     $.post("delete_adm.php", { codigo: codigo }, function(resultado) {
-        //         var pesquisa = $("#pesquisa").val();
-        //         retornaAdministradores(pesquisa);
-        //     });
-        // }
+        function deletaAluno(codigo) {
+            $.post('delete_aluno.php', { codigo: codigo }, function(resultado) {
+                var pesquisa = $("#pesquisa").val();
+                retornaAlunos(pesquisa);
+            });
+        }
 
         $(function() {
             retornaAlunos('');
