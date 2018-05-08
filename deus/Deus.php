@@ -272,6 +272,72 @@ class Deus {
         mysqli_close($conexao);
         return $resultado;
     }
+
+
+    // Funções relativas aos Cursos
+    public function recupera_curso($codigo) {
+        include("snippet/conecta.php");
+        $query = "SELECT * FROM curso
+                  WHERE codigo = ${codigo}";
+
+        include("snippet/resultado.php");
+        include("snippet/array_fetch_assoc.php");
+
+        mysqli_close($conexao);
+        return $array;
+    }
+
+    public function recupera_cursos($filtro) {
+        include("snippet/conecta.php");
+        $query = "SELECT * FROM curso";
+
+        if(!is_null($filtro))
+            $query .= " WHERE nome LIKE '%${filtro}%'";
+
+        include("snippet/resultado.php");
+        $dados = array();
+
+        while($dados_linha = mysqli_fetch_assoc($resultado))
+            array_push($dados, $dados_linha);
+
+        mysqli_close($conexao);
+        return $dados;
+    }
+
+    public function update_curso($codigo, $nome, $carga_horaria, $turma) {
+        include("snippet/conecta.php");
+        $query = "UPDATE curso SET
+                  nome = '${nome}',
+                  cargaHoraria = ${carga_horaria},
+                  turma = ${turma}
+                  WHERE codigo = ${codigo}";
+
+        include("snippet/resultado.php");
+
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function insere_curso($nome, $carga_horaria, $turma) {
+        include("snippet/conecta.php");
+        $query = "INSERT INTO curso(nome, cargaHoraria, turma)
+                  VALUES('${nome}', ${carga_horaria}, ${turma})";
+
+        include("snippet/resultado.php");
+
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function delete_curso($codigo) {
+        include("snippet/conecta.php");
+        $query = "DELETE FROM curso WHERE codigo = ${codigo}";
+        
+        include("snippet/resultado.php");
+        
+        mysqli_close($conexao);
+        return $resultado;
+    }
     // ==================
 
 
