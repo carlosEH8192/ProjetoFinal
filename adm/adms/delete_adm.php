@@ -1,4 +1,4 @@
-<?php // => /adm/adms/get_adm_adms.php
+<?php // => /adm/adms/delete_adm.php
     set_include_path("C:/htdocs");
     include_once("ProjetoFinalGit/deus/Deus.php");
 
