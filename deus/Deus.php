@@ -91,6 +91,7 @@ class Deus {
 
 
     // ADM
+    // Funções relativas aos Administradores
     public function loga_adm($username, $senha) {
         include("snippet/conecta.php");
 
@@ -165,20 +166,14 @@ class Deus {
     }
 
     public function insere_adm($username, $senha) {
-        if(!is_null($username) && $username != '' &&
-           !is_null($senha) && $senha != '')
-        {
-            include("snippet/conecta.php");
-            $query = "INSERT INTO adm(username, senha)
-                      VALUES('${username}', '${senha}')";
+        include("snippet/conecta.php");
+        $query = "INSERT INTO adm(username, senha)
+                  VALUES('${username}', '${senha}')";
 
-            include("snippet/resultado.php");
+        include("snippet/resultado.php");
 
-            mysqli_close($conexao);
-            return $resultado;
-
-        } else
-            return false;
+        mysqli_close($conexao);
+        return $resultado;
     }
 
     public function delete_adm($codigo){
@@ -191,7 +186,7 @@ class Deus {
         return $resultado;
     }
 
-
+    // Funções relativas aos Alunos
     public function recupera_aluno($codigo) {
         include("snippet/conecta.php");
         $query = "SELECT * FROM aluno
@@ -226,30 +221,54 @@ class Deus {
                                  $cpf, $email, $senha)
     {
         include("snippet/conecta.php");
-        // $query = "UPDATE aluno SET
-        //           nomeCompleto = '${nome_completo}',
-        //           sexo = '${sexo}',
-        //           email = '${email}',
-        //           senha = '${senha}',
-        //           telefoneCelular = '${celular}',
-        //           telefoneFixo = '${fixo}',
-        //           rg = '${rg}',
-        //           cpf = '${cpf}'
-        //           WHERE codigo = ${codigo}";
-
         $query = "UPDATE aluno SET
                   nomeCompleto = '${nome_completo}',
                   sexo = '${sexo}',
                   telefoneCelular = '${celular}',
                   telefoneFixo = '${fixo}',
                   rg = '${rg}',
-                  cpf = '${cpf}'
+                  cpf = '${cpf}',
                   email = '${email}',
-                  senha = '${senha}',
+                  senha = '${senha}'
                   WHERE codigo = ${codigo}";
 
         include("snippet/resultado.php");
 
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function insere_aluno($nome_completo, $sexo,
+                                 $celular, $fixo,
+                                 $rg, $cpf,
+                                 $email, $senha)
+    {
+        include("snippet/conecta.php");
+        $query = "INSERT INTO aluno (
+            nomeCompleto, sexo,
+            telefoneCelular, telefoneFixo,
+            rg, cpf,
+            email, senha
+
+        ) VALUES (
+            '${nome_completo}', '${sexo}',
+            '${celular}', '${fixo}',
+            '${rg}', '${cpf}',
+            '${email}', '${senha}'
+        )";
+
+        include("snippet/resultado.php");
+
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function delete_aluno($codigo) {
+        include("snippet/conecta.php");
+        $query = "DELETE FROM aluno WHERE codigo = ${codigo}";
+        
+        include("snippet/resultado.php");
+        
         mysqli_close($conexao);
         return $resultado;
     }
