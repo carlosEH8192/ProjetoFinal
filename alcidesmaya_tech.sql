@@ -1,8 +1,8 @@
 /*
-SQLyog Community v9.63 
-MySQL - 5.5.8 : Database - alcidesmaya_tech
+SQLyog Community v12.5.1 (64 bit)
+MySQL - 10.1.31-MariaDB : Database - alcidesmaya_tech
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -29,7 +29,9 @@ CREATE TABLE `adm` (
 
 /*Data for the table `adm` */
 
-insert  into `adm`(`codigo`,`username`,`senha`) values (1,'carloseh','cachacada'),(2,'brunovgs','globalismo'),(3,'usuarioInsanidade','vaiTomaNoCu');
+insert  into `adm`(`codigo`,`username`,`senha`) values 
+(1,'carloseh','cachacada'),
+(2,'brunovgs','globalismo');
 
 /*Table structure for table `aluno` */
 
@@ -39,18 +41,22 @@ CREATE TABLE `aluno` (
   `codigo` int(10) NOT NULL AUTO_INCREMENT,
   `nomeCompleto` varchar(80) NOT NULL,
   `sexo` char(1) NOT NULL,
-  `email` varchar(60) NOT NULL,
-  `senha` varchar(60) NOT NULL,
   `telefoneCelular` char(11) NOT NULL,
   `telefoneFixo` char(10) NOT NULL,
   `rg` char(10) NOT NULL,
   `cpf` char(11) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `senha` varchar(60) NOT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `aluno` */
 
-insert  into `aluno`(`codigo`,`nomeCompleto`,`sexo`,`email`,`senha`,`telefoneCelular`,`telefoneFixo`,`rg`,`cpf`) values (1,'Billy do Maxixe','M','bile@php.com.br','gambiarra','54546464646','6464545644','1010101010','11111111111'),(2,'Bruno Cuzao','M','brunovargas@webdesign.com.br','senhorGlobal','51999999999','5130417425','2020202020','22222222222'),(3,'Napolitano Silva','F','napo_triplo@gmail.com','cabecaDeMorango','51998989898','5130417425','3030303030','33333333333'),(4,'Carlos Hendges','M','carloseh.355@gmail.com','queMaravilha','51992030655','5130417425','4040404040','44444444444'),(5,'Darlan Hendges','M','','','','','5050505050','55555555555');
+insert  into `aluno`(`codigo`,`nomeCompleto`,`sexo`,`telefoneCelular`,`telefoneFixo`,`rg`,`cpf`,`email`,`senha`) values 
+(1,'Billy do Maxixe','M','54546464646','6464545644','1010101010','11111111111','bile@php.com.br','gambiarra'),
+(2,'Bruno Vargas','M','51999999999','5130417425','2020202020','22222222222','bruno_coleira@oba.com.br','vidaDeColeira'),
+(3,'Napolitano Silva','F','51998989898','Napolitano','3030303030','33333333333','napo_triplo@gmail.com','cabecaDeMorango'),
+(4,'Carlos Hendges','M','51992030655','5130417425','4040404040','44444444444','carloseh.355@gmail.com','queMaravilha');
 
 /*Table structure for table `curso` */
 
@@ -79,7 +85,12 @@ CREATE TABLE `nome_turma` (
 
 /*Data for the table `nome_turma` */
 
-insert  into `nome_turma`(`codigo`,`nome`) values (1,'TEC.INF-1T1'),(2,'TEC.INF-2T1'),(3,'TEC.INF-3T1'),(4,'TEC.INF-4T1'),(5,'TEC.INF-5T1');
+insert  into `nome_turma`(`codigo`,`nome`) values 
+(1,'TEC.INF-1T1'),
+(2,'TEC.INF-2T1'),
+(3,'TEC.INF-3T1'),
+(4,'TEC.INF-4T1'),
+(5,'TEC.INF-5T1');
 
 /*Table structure for table `professor` */
 
@@ -97,7 +108,12 @@ CREATE TABLE `professor` (
 
 /*Data for the table `professor` */
 
-insert  into `professor`(`codigo`,`nome`,`sexo`,`rg`,`cpf`,`disciplina`) values (1,'Xuxa','M','0123456789','01234567890','Redes'),(2,'Bile','M','0123456789','01234567890','PHP'),(3,'Skinhead','M','0123456789','01234567890','.NET'),(4,'Romeu','M','0123456789','01234567890','Design'),(5,'Faustao','M','0123456789','0123456789','Sistemas;Redes');
+insert  into `professor`(`codigo`,`nome`,`sexo`,`rg`,`cpf`,`disciplina`) values 
+(1,'Xuxa','M','0123456789','01234567890','Redes'),
+(2,'Bile','M','0123456789','01234567890','PHP'),
+(3,'Skinhead','M','0123456789','01234567890','.NET'),
+(4,'Romeu','M','0123456789','01234567890','Design'),
+(5,'Faustao','M','0123456789','0123456789','Sistemas;Redes');
 
 /*Table structure for table `turma` */
 
