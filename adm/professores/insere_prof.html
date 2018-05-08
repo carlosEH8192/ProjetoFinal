@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Alcides Maya</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../img/adjust.css" />
+    <link rel="stylesheet" href="../../colors/colors.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body background="../../img/background.png">
+    <!-- CABEÇALHO ADM (ISOLADO EM PHP) -->
+    <?php
+        include_once($iface_cb_nav_adm);
+    ?>
+
+    <div class="container-fluid">
+        <h1 class="col-md-12">Novo Professor</h1>
+
+        <form class="form-horizontal" method="post" onsubmit="return insereProf(this, event);">
+            <!-- NOME COMPLETO -->
+            <div class="form-group">
+                <label for="inp-nome-completo"
+                        class="col-sm-2 control-label">
+                    Nome completo: 
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control"
+                            id="inp-nome-completo" name="nome"
+                            placeholder="Nome" required
+                            autofocus />
+                </div>
+            </div>
+
+            <!-- SEXO -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    Sexo: 
+                </label>
+                <div class="col-sm-3">
+                    <label class="radio-inline">
+                        <input type="radio" id="radio-m"
+                                name="sexo" value="M" required />
+                        Masculino
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" id="radio-f"
+                                name="sexo" value="F" required />
+                        Feminino
+                    </label>
+                </div>
+            </div>
+
+            <!-- RG -->
+            <div class="form-group">
+                <label for="inp-rg"
+                        class="col-sm-2 control-label">
+                    RG: 
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control"
+                            id="inp-rg" name="rg"
+                            placeholder="RG" required />
+                </div>
+            </div>
+
+            <!-- CPF -->
+            <div class="form-group">
+                <label for="inp-cpf"
+                        class="col-sm-2 control-label">
+                    CPF: 
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control"
+                            id="inp-cpf" name="cpf"
+                            placeholder="CPF" required />
+                </div>
+            </div>
+
+            <!-- DISCIPLINA -->
+            <div class="form-group">
+                <label for="inp-disciplina"
+                        class="col-sm-2 control-label">
+                    Disciplina: 
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control"
+                            id="inp-disciplina" name="disciplina"
+                            placeholder="Disciplina" required />
+                </div>
+            </div>
+
+            <!-- SUBMIT -->
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-3">
+                    <input type="submit" class="btn btn-default"
+                            name="submit" value="Salvar"
+                            required />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="../../bootstrap/jquery/jquery.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+        function insereProf(form, ev) {
+            ev.preventDefault();
+
+            var nomeCompleto = form[0].value;
+            var sexo = $('input[name=sexo]:checked').val();
+            var rg = form[3].value;
+            var cpf = form[4].value;
+            var disciplina = form[5].value;
+
+            $.post('insere_prof_script.php', {
+                nomeCompleto: nomeCompleto,
+                sexo: sexo,
+                rg: rg,
+                cpf: cpf,
+                disciplina: disciplina
+            }, trataResposta);
+        }
+
+        function trataResposta(retorno) {
+            if(retorno == '1') {
+                alert('Professor criado com Sucesso!');
+                document.forms[0].reset();
+                window.location.href = 'index.php';
+
+            } else
+                alert('Erro ao criar Professor! Por favor, tente novamente mais tarde.');
+        }
+    </script>
+</body>
+</html>

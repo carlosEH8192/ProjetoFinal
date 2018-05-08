@@ -90,7 +90,8 @@ class Deus {
     // ==================
 
 
-    // ADM
+    // ADM    
+    // ############################
     // Funções relativas aos Administradores
     public function loga_adm($username, $senha) {
         include("snippet/conecta.php");
@@ -186,6 +187,7 @@ class Deus {
         return $resultado;
     }
 
+    // ############################
     // Funções relativas aos Alunos
     public function recupera_aluno($codigo) {
         include("snippet/conecta.php");
@@ -273,7 +275,7 @@ class Deus {
         return $resultado;
     }
 
-
+    // ############################
     // Funções relativas aos Cursos
     public function recupera_curso($codigo) {
         include("snippet/conecta.php");
@@ -332,6 +334,87 @@ class Deus {
     public function delete_curso($codigo) {
         include("snippet/conecta.php");
         $query = "DELETE FROM curso WHERE codigo = ${codigo}";
+        
+        include("snippet/resultado.php");
+        
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    // ############################
+    // Funções relativas aos Professores
+    public function recupera_prof($codigo) {
+        include("snippet/conecta.php");
+        $query = "SELECT * FROM professor
+                  WHERE codigo = ${codigo}";
+
+        include("snippet/resultado.php");
+        include("snippet/array_fetch_assoc.php");
+
+        mysqli_close($conexao);
+        return $array;
+    }
+
+    public function recupera_profs($filtro) {
+        include("snippet/conecta.php");
+        $query = "SELECT * FROM professor";
+
+        if(!is_null($filtro))
+            $query .= " WHERE nomeCompleto LIKE '%${filtro}%'";
+
+        include("snippet/resultado.php");
+        $dados = array();
+
+        while($dados_linha = mysqli_fetch_assoc($resultado))
+            array_push($dados, $dados_linha);
+
+        mysqli_close($conexao);
+        return $dados;
+    }
+
+    public function update_prof($codigo, $nome_completo,
+                                $sexo, $rg,
+                                $cpf, $disciplina)
+    {
+        include("snippet/conecta.php");
+        $query = "UPDATE professor SET
+                  nomeCompleto = '${nome_completo}',
+                  sexo = '${sexo}',
+                  rg = '${rg}',
+                  cpf = '${cpf}',
+                  disciplina = '${disciplina}'
+                  WHERE codigo = ${codigo}";
+
+        include("snippet/resultado.php");
+
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function insere_prof($nome_completo, $sexo,
+                                $rg, $cpf, $disciplina)
+    {
+        include("snippet/conecta.php");
+        $query = "INSERT INTO professor(
+            nomeCompleto, sexo,
+            rg, cpf,
+            disciplina
+
+        ) VALUES (
+            '${nome_completo}', '${sexo}',
+            '${rg}', '${cpf}',
+            '${disciplina}'
+        )";
+
+        include("snippet/resultado.php");
+
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function delete_prof($codigo) {
+        include("snippet/conecta.php");
+        $query = "DELETE FROM professor WHERE codigo = ${codigo}";
         
         include("snippet/resultado.php");
         
