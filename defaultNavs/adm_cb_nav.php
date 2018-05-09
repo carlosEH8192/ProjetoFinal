@@ -8,6 +8,7 @@
     $gestao_alunos = ROOT."/adm/alunos/index.php";
     $gestao_cursos = ROOT."/adm/cursos/index.php";
     $gestao_professores = ROOT."/adm/professores/index.php";
+    $gestao_nomes_turma = ROOT."/adm/nomesTurma/index.php";
 
     include_once("adm_cb_nav.html");
 ?>
