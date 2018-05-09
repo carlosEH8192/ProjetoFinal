@@ -52,7 +52,7 @@
         var formato = 
             '<tr>'+
                 '<th scope="row">@cod</th>' +
-                '<td>@nome</td>' +
+                '<td>@nomeCompleto</td>' +
                 '<td>@disciplina</td>' +
                 '<td>' +
                     '<a href="update_prof.php?codigo=@cod" class="btn btn-default">' +
@@ -88,7 +88,7 @@
                 
                 html += formato
                     .replace('@cod', dadoLocal.codigo)
-                    .replace('@nome', dadoLocal.nomeCompleto)
+                    .replace('@nomeCompleto', dadoLocal.nomeCompleto)
                     .replace('@disciplina', dadoLocal.disciplina)
                     .replace('@cod', dadoLocal.codigo)
                     .replace('@cod', dadoLocal.codigo)

@@ -69,9 +69,12 @@ CREATE TABLE `curso` (
   `turma` int(10) NOT NULL COMMENT 'FK (codigo da turma)',
   PRIMARY KEY (`codigo`,`turma`),
   KEY `codTurma` (`turma`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `curso` */
+
+insert  into `curso`(`codigo`,`nome`,`cargaHoraria`,`turma`) values 
+(1,'PHOTO-1M1',78,1);
 
 /*Table structure for table `nome_turma` */
 
@@ -98,17 +101,17 @@ DROP TABLE IF EXISTS `professor`;
 
 CREATE TABLE `professor` (
   `codigo` int(10) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(80) NOT NULL,
+  `nomeCompleto` varchar(80) NOT NULL,
   `sexo` char(1) NOT NULL,
   `rg` varchar(11) NOT NULL,
   `cpf` varchar(11) NOT NULL,
   `disciplina` varchar(30) NOT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `professor` */
 
-insert  into `professor`(`codigo`,`nome`,`sexo`,`rg`,`cpf`,`disciplina`) values 
+insert  into `professor`(`codigo`,`nomeCompleto`,`sexo`,`rg`,`cpf`,`disciplina`) values 
 (1,'Xuxa','M','0123456789','01234567890','Redes'),
 (2,'Bile','M','0123456789','01234567890','PHP'),
 (3,'Skinhead','M','0123456789','01234567890','.NET'),
