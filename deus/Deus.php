@@ -392,7 +392,8 @@ class Deus {
     }
 
     public function insere_prof($nome_completo, $sexo,
-                                $rg, $cpf, $disciplina)
+                                $rg, $cpf, $disciplina
+                                )
     {
         include("snippet/conecta.php");
         $query = "INSERT INTO professor(
@@ -415,6 +416,70 @@ class Deus {
     public function delete_prof($codigo) {
         include("snippet/conecta.php");
         $query = "DELETE FROM professor WHERE codigo = ${codigo}";
+        
+        include("snippet/resultado.php");
+        
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    // ############################
+    // Funções relativas aos Nomes de Turma
+    public function recupera_nome_turma($codigo) {
+        include("snippet/conecta.php");
+        $query = "SELECT * FROM nome_turma
+                  WHERE codigo = ${codigo}";
+
+        include("snippet/resultado.php");
+        include("snippet/array_fetch_assoc.php");
+
+        mysqli_close($conexao);
+        return $array;
+    }
+
+    public function recupera_nomes_turma($filtro) {
+        include("snippet/conecta.php");
+        $query = "SELECT * FROM nome_turma";
+
+        if(!is_null($filtro))
+            $query .= " WHERE nome LIKE '%${filtro}%'";
+
+        include("snippet/resultado.php");
+        $dados = array();
+
+        while($dados_linha = mysqli_fetch_assoc($resultado))
+            array_push($dados, $dados_linha);
+
+        mysqli_close($conexao);
+        return $dados;
+    }
+
+    public function update_nome_turma($codigo, $nome) {
+        include("snippet/conecta.php");
+        $query = "UPDATE nome_turma SET
+                  nome = '${nome}'
+                  WHERE codigo = ${codigo}";
+
+        include("snippet/resultado.php");
+
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function insere_nome_turma($nome) {
+        include("snippet/conecta.php");
+        $query = "INSERT INTO nome_turma(nome)
+                  VALUES('${nome}')";
+
+        include("snippet/resultado.php");
+
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function delete_nome_turma($codigo) {
+        include("snippet/conecta.php");
+        $query = "DELETE FROM nome_turma WHERE codigo = ${codigo}";
         
         include("snippet/resultado.php");
         
