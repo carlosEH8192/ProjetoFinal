@@ -110,3 +110,16 @@
   top: 1px;
 }
 
+.about-1 {
+  float: left;
+  text-align: justify;
+}
+
+.about-2 {
+  float: left;
+  text-align: justify;
+}
+
+.about-3 {
+  float: left;
+}

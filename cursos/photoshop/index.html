@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/ProjetoFinalGit/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/ProjetoFinalGit/img/adjust.css" />
     <link rel="stylesheet" href="/ProjetoFinalGit/colors/colors.css" />
-    <link rel="stylesheet" type="text/css" href="/ProjetoFinalGit/img/logo/logo-adjust.css">
+    <link rel="stylesheet" type="text/css" href="/ProjetoFinalGit/img/logo/logo-adjust.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <body background="/ProjetoFinalGit/img/background.png">
@@ -16,16 +16,52 @@
         include_once("../../defaultNavs/cb_nav.php");
     ?>
     
-    <div class="row">
-        <div class="col-xs-6 col-md-3">
-            <img class="img-responsive logo-curso" 
+    <div class="col-xs-6 col-md-3">
+        <img class="img-responsive logo-curso" 
                  src="/ProjetoFinalGit/img/logo/curso-1.png" alt="curso-1.png">
+    </div>
+
+    <img class="img-responsive" src="/ProjetoFinalGit/img/cursos/img-1.png"
+         alt="img-1.png" />
+    
+    <div class="container">
+        <div class="col-md-4 about-1">
+            <h2>Sobre o curso</h2>
+            <p>
+                Muito mais que um software de manipulação de imagens, o Adobe®
+                Photoshop® torna-se num ambiente digitalizado, uma ferramenta
+                completa de edição de imagens, permitindo desde funções
+                básicas de seleção de áreas à modificações complexas no
+                contexto das fotografias. As funções proporcionadas pelo
+                programa contemplam, desta forma, muitas áreas de interesse
+                pessoal e profissional.
+            </p>
         </div>
 
-        <img class="img-responsive" src="/ProjetoFinalGit/img/cursos/img-1.png"
-             alt="img-1.png" />
-</div>
-    
+        <div class="col-md-4 about-2">
+            <h2>Objetivos</h2>
+            <p>
+                Conhecer o programa e suas funções básicas para a produção
+                de impressos, arquivos digitais e manipulação de imagens.
+            </p>
+
+            <h2>Público</h2>
+            <p>
+                Estudantes, profissionais e demais interessados que desejam
+                uma introdução ao software e conhecimento das funcionalidades.
+            </p>
+        </div>
+
+        <div class="col-md-2 about-3">
+            <h3 style="margin-top: 30px;">Carga Horária</h3>
+            <p>60 Horas</p>
+            <h4 style="margin-top: 70px;">Quero saber mais</h4>
+            <a href="/ProjetoFinalGit/contato/index.php" target="_blank">
+                <button type="button" class="btn btn-primary btn-sm">MAIS INFORMAÇÕES</button>
+            </a>
+        </div>
+    </div>
+
     <!-- RODAPÉ (ISOLADO EM PHP) -->
     <?php
         include_once("../../defaultNavs/ft_nav.php");
