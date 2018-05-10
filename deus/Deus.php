@@ -20,7 +20,7 @@ class Deus {
         include("snippet/conecta.php");
 
         $query = "SELECT * FROM aluno
-                    WHERE cpf = '$cpf'";
+                  WHERE cpf = '$cpf'";
 
         include("snippet/resultado.php");
         include("snippet/array_fetch_assoc.php");
@@ -479,6 +479,102 @@ class Deus {
     public function delete_nome_turma($codigo) {
         include("snippet/conecta.php");
         $query = "DELETE FROM nome_turma WHERE codigo = ${codigo}";
+        
+        include("snippet/resultado.php");
+        
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    // ############################
+    // Funções relativas às Turmas
+    public function recupera_turma($codigo) {
+        include("snippet/conecta.php");        
+        $query = "SELECT * FROM turma WHERE codigo = ${codigo}";
+
+        include("snippet/resultado.php");
+        include("snippet/array_fetch_assoc.php");
+
+        mysqli_close($conexao);
+        return $array;
+    }
+
+    public function recupera_turmas($filtro) {
+        include("snippet/conecta.php");
+        $query =
+            "SELECT t.codigo AS turmaCodigo,
+                    nT.nome AS nomeTurma,
+                    a.nomeCompleto AS alunoNome,
+                    p.nomeCompleto AS professorNome,
+                    c.nome AS cursoNome
+            FROM turma AS t
+
+            INNER JOIN nome_turma AS nT
+            ON t.codNomeTurma = nT.codigo
+
+            INNER JOIN aluno AS a
+            ON t.codAluno = a.codigo
+
+            INNER JOIN professor AS p
+            ON t.codProfessor = p.codigo
+
+            INNER JOIN curso AS c
+            ON t.codCurso = c.codigo";
+
+        if(!is_null($filtro))
+            $query .= " WHERE a.nomeCompleto LIKE '%${filtro}%'";
+
+        include("snippet/resultado.php");
+        $dados = array();
+
+        while($dados_linha = mysqli_fetch_assoc($resultado))
+            array_push($dados, $dados_linha);
+
+        mysqli_close($conexao);
+        return $dados;
+    }
+
+    public function update_turma($codigo, $cod_nome_turma,
+                                 $cod_aluno, $cod_professor,
+                                 $cod_curso)
+    {
+        include("snippet/conecta.php");
+        $query = "UPDATE turma SET
+                      codNomeTurma = ${cod_nome_turma},
+                      codAluno = ${cod_aluno},
+                      codProfessor = ${cod_professor},
+                      codCurso = ${cod_curso}
+                  WHERE codigo = ${codigo}";
+
+        include("snippet/resultado.php");
+
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function insere_turma($cod_nome_turma, $cod_aluno,
+                                 $cod_professor, $cod_curso
+                                )
+    {
+        include("snippet/conecta.php");
+        $query = "INSERT INTO turma (
+            codNomeTurma, codAluno,
+            codProfessor, codCurso
+
+        ) VALUES (
+            ${cod_nome_turma}, ${cod_aluno},
+            ${cod_professor}, ${cod_curso}
+        )";
+
+        include("snippet/resultado.php");
+
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function delete_turma($codigo) {
+        include("snippet/conecta.php");
+        $query = "DELETE FROM turma WHERE codigo = ${codigo}";
         
         include("snippet/resultado.php");
         
