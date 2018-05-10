@@ -99,6 +99,7 @@
     margin-bottom: 15px;
 }
 
+/*CURSO*/
 .logo-curso {
   vertical-align: middle;
   position: absolute;
@@ -122,4 +123,21 @@
 
 .about-3 {
   float: left;
+}
+
+/*QUEM SOMOS*/
+.who {
+  padding-right: 0;
+  padding-left: 0;
+  
+}
+
+.text-adjust {
+  float: left;
+  font-size: 16px;
+  text-align: justify;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 100px;
+  padding-right: 100px;
 }
