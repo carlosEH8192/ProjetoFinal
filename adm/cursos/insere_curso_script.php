@@ -6,17 +6,15 @@
 
     $nome = $_POST["nome"];
     $carga_horaria = $_POST["cargaHoraria"];
-    $turma = $_POST["turma"];
 
     $resultado = false;
 
     if(
         !is_null($nome) &&
-        !is_null($carga_horaria) &&
-        !is_null($turma)
+        !is_null($carga_horaria)
       )
     {
-        $resultado = $deus->insere_curso($nome, $carga_horaria, $turma);
+        $resultado = $deus->insere_curso($nome, $carga_horaria);
     }
 
     print($resultado);

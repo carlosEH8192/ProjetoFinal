@@ -306,12 +306,11 @@ class Deus {
         return $dados;
     }
 
-    public function update_curso($codigo, $nome, $carga_horaria, $turma) {
+    public function update_curso($codigo, $nome, $carga_horaria) {
         include("snippet/conecta.php");
         $query = "UPDATE curso SET
                   nome = '${nome}',
-                  cargaHoraria = ${carga_horaria},
-                  turma = ${turma}
+                  cargaHoraria = ${carga_horaria}
                   WHERE codigo = ${codigo}";
 
         include("snippet/resultado.php");
@@ -320,10 +319,10 @@ class Deus {
         return $resultado;
     }
 
-    public function insere_curso($nome, $carga_horaria, $turma) {
+    public function insere_curso($nome, $carga_horaria) {
         include("snippet/conecta.php");
-        $query = "INSERT INTO curso(nome, cargaHoraria, turma)
-                  VALUES('${nome}', ${carga_horaria}, ${turma})";
+        $query = "INSERT INTO curso(nome, cargaHoraria)
+                  VALUES('${nome}', ${carga_horaria})";
 
         include("snippet/resultado.php");
 

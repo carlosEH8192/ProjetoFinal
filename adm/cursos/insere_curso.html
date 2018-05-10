@@ -46,19 +46,6 @@
                 </div>
             </div>
 
-            <!-- TURMA -->
-            <div class="form-group">
-                <label for="inp-turma"
-                        class="col-sm-2 control-label">
-                    Turma: 
-                </label>
-                <div class="col-sm-3">
-                    <input type="number" class="form-control"
-                            id="inp-turma" name="turma"
-                            placeholder="Turma" required />
-                </div>
-            </div>
-
             <!-- SUBMIT -->
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-3">
@@ -79,12 +66,10 @@
 
             var nome = form[0].value;
             var cargaHoraria = form[1].value;
-            var turma = form[2].value;
 
             $.post('insere_curso_script.php', {
                 nome: nome,
-                cargaHoraria: cargaHoraria,
-                turma: turma
+                cargaHoraria: cargaHoraria
             }, trataResposta);
         }
 

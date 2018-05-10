@@ -7,18 +7,16 @@
     $codigo = $_POST["codigo"];
     $nome = $_POST["nome"];
     $carga_horaria = $_POST["cargaHoraria"];
-    $turma = $_POST["turma"];
 
     $resultado = false;
 
     if(
         !is_null($codigo) && !is_null($nome) &&
-        !is_null($carga_horaria) && !is_null($turma)
+        !is_null($carga_horaria)
       )
     {
         $resultado = $deus->update_curso(
-            $codigo, $nome,
-            $carga_horaria, $turma
+            $codigo, $nome, $carga_horaria
         );
     }
 

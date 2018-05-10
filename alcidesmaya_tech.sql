@@ -48,15 +48,14 @@ CREATE TABLE `aluno` (
   `email` varchar(60) NOT NULL,
   `senha` varchar(60) NOT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `aluno` */
 
 insert  into `aluno`(`codigo`,`nomeCompleto`,`sexo`,`telefoneCelular`,`telefoneFixo`,`rg`,`cpf`,`email`,`senha`) values 
-(1,'Billy do Maxixe','M','54546464646','6464545644','1010101010','11111111111','bile@php.com.br','gambiarra'),
-(2,'Bruno Vargas','M','51999999999','5130417425','2020202020','22222222222','bruno_coleira@oba.com.br','vidaDeColeira'),
-(3,'Napolitano Silva','F','51998989898','Napolitano','3030303030','33333333333','napo_triplo@gmail.com','cabecaDeMorango'),
-(4,'Carlos Hendges','M','51992030655','5130417425','4040404040','44444444444','carloseh.355@gmail.com','queMaravilha');
+(1,'Bruno Vargas','M','51999999999','5130417425','2020202020','22222222222','bruno_coleira@oba.com.br','vidaDeColeira'),
+(2,'Napolitano Silva','F','51998989898','Napolitano','3030303030','33333333333','napo_triplo@gmail.com','cabecaDeMorango'),
+(3,'Carlos Hendges','M','51992030655','5130417425','4040404040','44444444444','carloseh.355@gmail.com','queMaravilha');
 
 /*Table structure for table `curso` */
 
@@ -66,15 +65,15 @@ CREATE TABLE `curso` (
   `codigo` int(10) NOT NULL AUTO_INCREMENT,
   `nome` varchar(60) NOT NULL,
   `cargaHoraria` int(2) NOT NULL,
-  `turma` int(10) NOT NULL COMMENT 'FK (codigo da turma)',
-  PRIMARY KEY (`codigo`,`turma`),
-  KEY `codTurma` (`turma`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `curso` */
 
-insert  into `curso`(`codigo`,`nome`,`cargaHoraria`,`turma`) values 
-(1,'PHOTO-1M1',78,1);
+insert  into `curso`(`codigo`,`nome`,`cargaHoraria`) values 
+(1,'PSHOP',78),
+(2,'CDRAW',56),
+(3,'INF-BSC',56);
 
 /*Table structure for table `nome_turma` */
 
@@ -84,16 +83,16 @@ CREATE TABLE `nome_turma` (
   `codigo` int(10) NOT NULL AUTO_INCREMENT,
   `nome` varchar(30) NOT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `nome_turma` */
 
 insert  into `nome_turma`(`codigo`,`nome`) values 
-(1,'TEC.INF-1T1'),
-(2,'TEC.INF-2T1'),
-(3,'TEC.INF-3T1'),
-(4,'TEC.INF-4T1'),
-(5,'TEC.INF-5T1');
+(1,'1T1'),
+(2,'1T2'),
+(3,'1T3'),
+(4,'1T4'),
+(5,'1T5');
 
 /*Table structure for table `professor` */
 
@@ -107,12 +106,12 @@ CREATE TABLE `professor` (
   `cpf` varchar(11) NOT NULL,
   `disciplina` varchar(30) NOT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `professor` */
 
 insert  into `professor`(`codigo`,`nomeCompleto`,`sexo`,`rg`,`cpf`,`disciplina`) values 
-(1,'Xuxa','M','0123456789','01234567890','Redes'),
+(1,'Xuxa','M','0123456789','01234567890','Redes;Sistemas'),
 (2,'Bile','M','0123456789','01234567890','PHP'),
 (3,'Skinhead','M','0123456789','01234567890','.NET'),
 (4,'Romeu','M','0123456789','01234567890','Design'),
@@ -124,17 +123,27 @@ DROP TABLE IF EXISTS `turma`;
 
 CREATE TABLE `turma` (
   `codigo` int(10) NOT NULL AUTO_INCREMENT,
-  `codTurma` int(10) NOT NULL,
+  `codNomeTurma` int(10) NOT NULL,
   `codAluno` int(10) NOT NULL,
   `codProfessor` int(10) NOT NULL,
-  PRIMARY KEY (`codigo`,`codTurma`,`codAluno`,`codProfessor`),
-  UNIQUE KEY `codigo` (`codigo`),
-  KEY `codTurma` (`codTurma`),
+  `codCurso` int(10) NOT NULL,
+  PRIMARY KEY (`codigo`),
   KEY `codAluno` (`codAluno`),
-  KEY `codProfessor` (`codProfessor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `codCurso` (`codCurso`),
+  KEY `codNomeTurma` (`codNomeTurma`),
+  KEY `codProfessor` (`codProfessor`),
+  CONSTRAINT `codAluno` FOREIGN KEY (`codAluno`) REFERENCES `aluno` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `codCurso` FOREIGN KEY (`codCurso`) REFERENCES `curso` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `codNomeTurma` FOREIGN KEY (`codNomeTurma`) REFERENCES `nome_turma` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `codProfessor` FOREIGN KEY (`codProfessor`) REFERENCES `professor` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `turma` */
+
+insert  into `turma`(`codigo`,`codNomeTurma`,`codAluno`,`codProfessor`,`codCurso`) values 
+(1,1,1,1,1),
+(2,2,2,2,2),
+(3,2,3,3,3);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
