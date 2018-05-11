@@ -1,6 +1,17 @@
 <?php // => /deus/Deus.php
 
-class Deus {    
+class Deus {
+    // TODOS
+    public function logout() {
+        session_start();
+        session_unset();
+        session_destroy();
+
+        header("Location: ../index.php");
+    }
+    // ==================
+
+
     // ALUNO
     public function cpf_eh_valido($cpf) {
         include("snippet/conecta.php");
@@ -29,8 +40,11 @@ class Deus {
         return $array;
     }
 
-    public function finaliza_cadastro($nome_completo, $sexo, $celular, $fixo,
-                                      $rg, $cpf, $email, $senha)
+    public function finaliza_cadastro($nome_completo, $sexo,
+                                      $celular, $fixo,
+                                      $rg, $cpf,
+                                      $email, $senha
+                                     )
     {
         include("snippet/conecta.php");
 
@@ -90,9 +104,224 @@ class Deus {
     // ==================
 
 
-    // ADM    
-    // ############################
-    // Funções relativas aos Administradores
+    // PROFESSORES
+    public function loga_prof($email, $senha) {
+        include("snippet/conecta.php");
+
+        $query = "SELECT * FROM professor
+                  WHERE email = '${email}' AND
+                        senha = '${senha}'";
+
+        include("snippet/resultado.php");
+        include("snippet/array_fetch_assoc.php");
+
+        if(!is_null($array)) {
+            session_id("profLogin");
+            session_start();
+            
+            session_unset();
+            session_destroy();
+
+            session_id("prof");
+            session_start();
+
+            $_SESSION["validacao"] = "prof";
+
+            $_SESSION["nome_completo"] = $array["nomeCompleto"];
+            $_SESSION["sexo"] = $array["sexo"];
+
+            $_SESSION["rg"] = $array["rg"];
+            $_SESSION["cpf"] = $array["cpf"];
+            $_SESSION["disciplina"] = $array["disciplina"];
+
+            $_SESSION["email"] = $array["email"];
+            $_SESSION["senha"] = $array["senha"];
+
+            session_write_close();
+            header("Location: ../professor/index.php");
+
+        } else 
+            print("<h1>ERRO AO FAZER LOGIN!</h1>");
+
+        mysqli_close($conexao);
+    }
+
+    #### Funções relativas às Notas
+    public function recupera_nota($codigo) {
+        include("snippet/conecta.php");
+        $query = "SELECT * FROM nota WHERE codigo = ${codigo}";
+
+        include("snippet/resultado.php");
+        include("snippet/array_fetch_assoc.php");
+
+        mysqli_close($conexao);
+        return $array;
+    }
+
+    public function recupera_notas($filtro) {
+        include("snippet/conecta.php");
+        $query =
+            "SELECT n.codigo,
+                    n.atividadeNome,
+                    n.nota,
+                    a.nomeCompleto AS alunoNome,
+                    nT.nome AS nomeTurma
+            FROM nota as n
+
+            INNER JOIN aluno AS a
+            ON n.codAluno = a.codigo
+
+            INNER JOIN nome_turma AS nT
+            ON n.codNomeTurma = nT.codigo";
+
+        if(!is_null($filtro))
+            $query .= " WHERE n.atividadeNome LIKE '%${filtro}%'";
+
+        include("snippet/resultado.php");
+        $dados = array();
+
+        while($dados_linha = mysqli_fetch_assoc($resultado))
+            array_push($dados, $dados_linha);
+
+        mysqli_close($conexao);
+        return $dados;
+    }
+
+    public function update_nota($codigo, $atividade_nome,
+                                $nota, $cod_aluno,
+                                $cod_nome_turma)
+    {
+        include("snippet/conecta.php");
+        $query = "UPDATE nota SET
+                      atividadeNome = '${atividade_nome}',
+                      nota = ${nota},
+                      codAluno = ${cod_aluno},
+                      codNomeTurma = ${cod_nome_turma}
+                  WHERE codigo = ${codigo}";
+
+        include("snippet/resultado.php");
+
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function insere_nota($atividade_nome, $nota,
+                                $cod_aluno, $cod_nome_turma
+                               )
+    {
+        include("snippet/conecta.php");
+        $query = "INSERT INTO nota (
+            atividadeNome, nota,
+            codAluno, codNomeTurma
+
+        ) VALUES (
+            '${atividade_nome}', ${nota},
+            ${cod_aluno}, ${cod_nome_turma}
+        )";
+
+        include("snippet/resultado.php");
+
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function delete_nota($codigo) {
+        include("snippet/conecta.php");
+        $query = "DELETE FROM nota WHERE codigo = ${codigo}";
+        
+        include("snippet/resultado.php");
+        
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    #### Funções relativas às Presenças
+    public function recupera_presenca($codigo) {
+        include("snippet/conecta.php");
+        $query = "SELECT * FROM presenca WHERE codigo = ${codigo}";
+
+        include("snippet/resultado.php");
+        include("snippet/array_fetch_assoc.php");
+
+        mysqli_close($conexao);
+        return $array;
+    }
+
+    public function recupera_presencas($filtro) {
+        include("snippet/conecta.php");
+        
+        $query =
+            "SELECT p.codigo,
+                    p.dia,
+                    a.nomeCompleto AS alunoNome,
+                    nT.nome AS nomeTurma
+            FROM presenca as p
+
+            INNER JOIN aluno AS a
+            ON p.codAluno = a.codigo
+
+            INNER JOIN nome_turma AS nT
+            ON p.codNomeTurma = nT.codigo";
+
+        if(!is_null($filtro))
+            $query .= " WHERE a.nomeCompleto LIKE '%${filtro}%'";
+
+        include("snippet/resultado.php");
+        $dados = array();
+
+        while($dados_linha = mysqli_fetch_assoc($resultado))
+            array_push($dados, $dados_linha);
+
+        mysqli_close($conexao);
+        return $dados;
+    }
+
+    public function update_presenca($codigo, $dia,
+                                    $cod_aluno, $cod_nome_turma
+                                   )
+    {
+        include("snippet/conecta.php");
+        $query = "UPDATE presenca SET
+                      dia = '${dia}',
+                      codAluno = ${cod_aluno},
+                      codNomeTurma = ${cod_nome_turma}
+                  WHERE codigo = ${codigo}";
+
+        include("snippet/resultado.php");
+
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function insere_presenca($dia, $cod_aluno, $cod_nome_turma)
+    {
+        include("snippet/conecta.php");
+        $query = "INSERT INTO presenca (
+            dia, codAluno, codNomeTurma
+        ) VALUES (
+            '${dia}', ${cod_aluno}, ${cod_nome_turma}
+        )";
+
+        include("snippet/resultado.php");
+
+        mysqli_close($conexao);
+        return $resultado;
+    }
+
+    public function delete_presenca($codigo) {
+        include("snippet/conecta.php");
+        $query = "DELETE FROM presenca WHERE codigo = ${codigo}";
+        
+        include("snippet/resultado.php");
+        
+        mysqli_close($conexao);
+        return $resultado;
+    }
+    // ==================
+
+
+    // ADM
+    #### Funções relativas aos Administradores
     public function loga_adm($username, $senha) {
         include("snippet/conecta.php");
 
@@ -103,13 +332,13 @@ class Deus {
         include("snippet/resultado.php");
         include("snippet/array_fetch_assoc.php");
 
-        session_id("admLogin");
-        session_start();
-        
-        session_unset();
-        session_destroy();
-
         if(!is_null($array)) {
+            session_id("admLogin");
+            session_start();
+            
+            session_unset();
+            session_destroy();
+
             session_id("adm");
             session_start();
 
@@ -187,8 +416,7 @@ class Deus {
         return $resultado;
     }
 
-    // ############################
-    // Funções relativas aos Alunos
+    #### Funções relativas aos Alunos
     public function recupera_aluno($codigo) {
         include("snippet/conecta.php");
         $query = "SELECT * FROM aluno
@@ -275,8 +503,7 @@ class Deus {
         return $resultado;
     }
 
-    // ############################
-    // Funções relativas aos Cursos
+    #### Funções relativas aos Cursos
     public function recupera_curso($codigo) {
         include("snippet/conecta.php");
         $query = "SELECT * FROM curso
@@ -340,8 +567,7 @@ class Deus {
         return $resultado;
     }
 
-    // ############################
-    // Funções relativas aos Professores
+    #### Funções relativas aos Professores
     public function recupera_prof($codigo) {
         include("snippet/conecta.php");
         $query = "SELECT * FROM professor
@@ -392,7 +618,7 @@ class Deus {
 
     public function insere_prof($nome_completo, $sexo,
                                 $rg, $cpf, $disciplina
-                                )
+                               )
     {
         include("snippet/conecta.php");
         $query = "INSERT INTO professor(
@@ -422,8 +648,7 @@ class Deus {
         return $resultado;
     }
 
-    // ############################
-    // Funções relativas aos Nomes de Turma
+    #### Funções relativas aos Nomes de Turma
     public function recupera_nome_turma($codigo) {
         include("snippet/conecta.php");
         $query = "SELECT * FROM nome_turma
@@ -486,8 +711,7 @@ class Deus {
         return $resultado;
     }
 
-    // ############################
-    // Funções relativas às Turmas
+    #### Funções relativas às Turmas
     public function recupera_turma($codigo) {
         include("snippet/conecta.php");        
         $query = "SELECT * FROM turma WHERE codigo = ${codigo}";
@@ -554,7 +778,7 @@ class Deus {
 
     public function insere_turma($cod_nome_turma, $cod_aluno,
                                  $cod_professor, $cod_curso
-                                )
+                                 )
     {
         include("snippet/conecta.php");
         $query = "INSERT INTO turma (
@@ -580,17 +804,6 @@ class Deus {
         
         mysqli_close($conexao);
         return $resultado;
-    }
-    // ==================
-
-
-    // TODOS
-    public function logout() {
-        session_start();
-        session_unset();
-        session_destroy();
-
-        header("Location: ../index.php");
     }
     // ==================
 }

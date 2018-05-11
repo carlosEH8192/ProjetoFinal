@@ -1,8 +1,7 @@
 <?php // => /contato/envia_email.php
     $to = "Carlos Eduardo <carloseh.355@gmail.com>";
-    
 
-     printf($_POST["nome-completo"]);
+    printf($_POST["nome-completo"]);
 
     $nome_completo_cliente = $_POST["nome-completo"];
     $email_cliente = $_POST["email"];

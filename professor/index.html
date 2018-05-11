@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Alcides Maya</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../img/adjust.css" />
+    <link rel="stylesheet" href="../colors/colors.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body background="../img/background.png">
+    <!-- CABEÇALHO ADM (ISOLADO EM PHP) -->
+    <?php
+        include_once($iface_cb_nav_prof);
+    ?>
+
+    <div class="container-fluid">
+        <h1 class="col-sm-12" style="margin-top: 30px;">
+            Bem-Vindo, professor <u><?= $nome; ?></u>.
+        </h1>
+        <h2 class="col-sm-12">
+            Comece a utilizar as funções clicando nas Barras de Navegação.
+        </h2>
+    </div>
+
+    <script src="../bootstrap/jquery/jquery.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

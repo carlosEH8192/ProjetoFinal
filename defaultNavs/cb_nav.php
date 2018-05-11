@@ -51,7 +51,16 @@
             isset($_SESSION["validacao"]) &&
             $_SESSION["validacao"] == "admLogin";
 
-        if($ss_ativa && !$validacao_existe_eh_adm_login) {
+        $validacao_existe_eh_prof_login =
+            isset($_SESSION["validacao"]) &&
+            $_SESSION["validacao"] == "profLogin";
+
+        if(
+            $ss_ativa && 
+            !$validacao_existe_eh_adm_login &&
+            !$validacao_existe_eh_prof_login
+          )
+        {
             session_unset();
             session_destroy();
         }

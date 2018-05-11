@@ -26,8 +26,7 @@ function enviaContato(form){
     return false;
 }
 
-function acionaLoading(aciona){
-
+function acionaLoading(aciona) {
     if(aciona){
       document.forms[0].submit.value='Carregando...';
       document.forms[0].submit.disabled=true;

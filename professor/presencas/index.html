@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Alcides Maya</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../img/adjust.css" />
+    <link rel="stylesheet" href="../../colors/colors.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body background="../../img/background.png">
+    <!-- CABEÇALHO ADM (ISOLADO EM PHP) -->
+    <?php
+        include_once($iface_cb_nav_prof);
+    ?>
+
+    <div class="container-fluid">
+        <h1 class="col-md-12">Consulta de Presenças</h1>
+
+        <div class="col-md-12">
+            <a class="btn btn-primary" href="insere_presenca.php">Nova Presença</a>
+        </div>
+
+        <div class="col-md-12">
+            <input type="text" class="form-control"
+                   id="pesquisa" name="inp-pesquisa" placeholder="Filtro"
+                   onkeypress="filtra(event, this)" />
+        </div>
+
+        <div class="col-md-12">
+            <table class="table table-hover" id="tbl">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Dia</th>
+                        <th scope="col">Aluno</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../../bootstrap/jquery/jquery.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+        var formato = 
+            '<tr>'+
+                '<th scope="row">@cod</th>' +
+                '<td>@dia</td>' +
+                '<td>@alunoNome</td>' +
+                '<td>' +
+                    '<a href="update_presenca.php?codigo=@cod" class="btn btn-default">' +
+                        'Editar' +
+                    '</a>' +
+                '</td>' +
+                '<td>' +
+                    '<button class="btn btn-danger" onclick="deletaPresenca(@cod);">' +
+                        'Excluir' +
+                    '</button>' +
+                '</td>' +
+            '</tr>\n';
+
+        function retornaPresencas(filtro) {
+            $.get('get_presenca_presencas.php', { filtro: filtro })
+                .done(function(dadosPresencas) {
+                    montaTable(JSON.parse(dadosPresencas));
+                });
+        }
+
+        function filtra(ev, el) {
+            if(ev.which == 13)
+                retornaPresencas(el.value);
+        }
+
+        function montaTable(dadosJson) {
+            var tbl$ = $('#tbl');
+            tbl$.find('tbody').empty();
+
+            var html = '';
+
+            for(var i = 0; i < dadosJson.length; i++) {
+                var dadoLocal = dadosJson[i];
+                
+                html += formato
+                    .replace(/@cod/g, dadoLocal.codigo)
+                    .replace('@dia', dadoLocal.dia)
+                    .replace('@alunoNome', dadoLocal.alunoNome)
+            }
+
+            tbl$.find('tbody').html(html);
+        }
+
+        function deletaPresenca(codigo) {
+            $.post('delete_presenca.php', { codigo: codigo })
+                .done(function() {
+                    var pesquisa = $("#pesquisa").val();
+                    retornaPresencas(pesquisa);
+                });
+        }
+
+        $(function() {
+            retornaPresencas('');
+        });
+    </script>
+</body>
+</html>

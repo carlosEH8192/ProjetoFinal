@@ -1,0 +1,70 @@
+<nav class="navbar bg-logo" id="nav-logo"> 
+        <div class="container-fluid">
+            <img class="img-responsive" id="alcidesmaya-logo" src="<?= CB_LOGO; ?>" alt="alcidesmaya">
+        </div>
+    </nav>
+    <nav class="navbar bg-menu mg-bt">
+        <div class="container-fluid">
+            <!-- NAVBAR HEADER -->
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed"
+                        data-toggle="collapse" data-target="#navbar-insano"
+                        aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- NAVBAR BODY -->
+            <div class="collapse navbar-collapse" id="navbar-insano">
+                <!-- NAVBARS DROPDOWN: LER, INSERIR, ALTERAR, DELETAR -->
+                <ul class="nav navbar-nav">
+                    <!-- GESTÃO -->
+                    <li class="dropdown">
+                        <a href="#" 
+                           class="dropdown-toggle"
+                           data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">
+                            Gestão <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="<?= $gestao_notas; ?>">
+                                    Notas de Alunos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= $gestao_presenca; ?>">
+                                    Presença de Alunos
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- NAVBAR USERNAME -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#"
+                           class="dropdown-toggle"
+                           data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">
+
+                            <span class="glyphicon glyphicon-user"></span>
+                            &nbsp;<?= $nome; ?>
+                            <span class="caret"></span>
+
+                            <!-- MENU LOGIN -->
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li>
+                                    <a href="<?= LOGOUT; ?>">Logout</a>
+                                </li>
+                            </ul>
+                        </a>
+                    </li>
+                </ul>
+            </div><!-- .navbar-collapse -->
+        </div><!-- .container-fluid -->
+    </nav>

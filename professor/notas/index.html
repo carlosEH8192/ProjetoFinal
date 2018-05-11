@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Alcides Maya</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../img/adjust.css" />
+    <link rel="stylesheet" href="../../colors/colors.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body background="../../img/background.png">
+    <!-- CABEÇALHO ADM (ISOLADO EM PHP) -->
+    <?php
+        include_once($iface_cb_nav_prof);
+    ?>
+
+    <div class="container-fluid">
+        <h1 class="col-md-12">Consulta de Notas</h1>
+
+        <div class="col-md-12">
+            <a class="btn btn-primary" href="insere_nota.php">Nova Nota</a>
+        </div>
+
+        <div class="col-md-12">
+            <input type="text" class="form-control"
+                   id="pesquisa" name="inp-pesquisa" placeholder="Filtro"
+                   onkeypress="filtra(event, this)" />
+        </div>
+
+        <div class="col-md-12">
+            <table class="table table-hover" id="tbl">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Atividade</th>
+                        <th scope="col">Nota</th>
+                        <th scope="col">Aluno</th>
+                        <th scope="col">Turma</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../../bootstrap/jquery/jquery.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+        var formato = 
+            '<tr>'+
+                '<th scope="row">@cod</th>' +
+                '<td>@atividadeNome</td>' +
+                '<td>@nota</td>' +
+                '<td>@alunoNome</td>' +
+                '<td>@nomeTurma</td>' +
+                '<td>' +
+                    '<a href="update_nota.php?codigo=@cod" class="btn btn-default">' +
+                        'Editar' +
+                    '</a>' +
+                '</td>' +
+                '<td>' +
+                    '<button class="btn btn-danger" onclick="deletaNota(@cod);">' +
+                        'Excluir' +
+                    '</button>' +
+                '</td>' +
+            '</tr>\n';
+
+        function retornaNotas(filtro) {
+            $.get('get_nota_notas.php', { filtro: filtro })
+                .done(function(dadosNotas) {
+                    montaTable(JSON.parse(dadosNotas));
+                });
+        }
+
+        function filtra(ev, el) {
+            if(ev.which == 13)
+                retornaNotas(el.value);
+        }
+
+        function montaTable(dadosJson) {
+            var tbl$ = $('#tbl');
+            tbl$.find('tbody').empty();
+
+            var html = '';
+
+            for(var i = 0; i < dadosJson.length; i++) {
+                var dadoLocal = dadosJson[i];
+                
+                html += formato
+                    .replace(/@cod/g, dadoLocal.codigo)
+                    .replace('@atividadeNome', dadoLocal.atividadeNome)
+                    .replace('@nota', dadoLocal.nota)
+                    .replace('@alunoNome', dadoLocal.alunoNome)
+                    .replace('@nomeTurma', dadoLocal.nomeTurma)
+            }
+
+            tbl$.find('tbody').html(html);
+        }
+
+        function deletaNota(codigo) {
+            $.post('delete_nota.php', { codigo: codigo })
+                .done(function() {
+                    var pesquisa = $("#pesquisa").val();
+                    retornaNotas(pesquisa);
+                });
+        }
+
+        $(function() {
+            retornaNotas('');
+        });
+    </script>
+</body>
+</html>

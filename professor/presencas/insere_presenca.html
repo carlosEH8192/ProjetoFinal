@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Alcides Maya</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../img/adjust.css" />
+    <link rel="stylesheet" href="../../colors/colors.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body background="../../img/background.png">
+    <!-- CABEÇALHO ADM (ISOLADO EM PHP) -->
+    <?php
+        include_once($iface_cb_nav_prof);
+    ?>
+
+    <div class="container-fluid">
+        <h1 class="col-md-12">Nova Presença</h1>
+
+        <form class="form-horizontal" method="post" onsubmit="return inserePresenca(this, event)">
+            <!-- DIA -->
+            <div class="form-group">
+                <label for="inp-dia" class="col-sm-2 control-label">
+                    Dia: 
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control"
+                            id="inp-dia" name="dia"
+                            placeholder="Dia" required
+                            autofocus />
+                </div>
+            </div>
+
+            <!-- CÓDIGO DO ALUNO -->
+            <div class="form-group">
+                <label for="sel-cod-aluno"
+                        class="col-sm-2 control-label">
+                    Código do Aluno: 
+                </label>
+                <div class="col-sm-3">
+                    <select class="form-control" id="sel-cod-aluno"
+                            name="cod-aluno" required>
+                    </select>
+                </div>
+            </div>
+
+            <!-- CÓDIGO DO NOME DA TURMA -->
+            <div class="form-group">
+                <label for="sel-cod-nome-turma"
+                        class="col-sm-2 control-label">
+                    Código do Nome da Turma: 
+                </label>
+                <div class="col-sm-3">
+                    <select class="form-control" id="sel-cod-nome-turma"
+                            name="cod-nome-turma" required>
+                    </select>
+                </div>
+            </div>
+
+            <!-- SUBMIT -->
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-3">
+                    <input type="submit" class="btn btn-default"
+                            name="submit" value="Salvar"
+                            required />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="../../bootstrap/jquery/jquery.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+        var optionAluno = '<option value="@cod">' +
+                              '@cod (@nomeCompleto)' +
+                          '</option>';
+
+        var optionNomeTurma = '<option value="@cod">' +
+                                  '@cod (@nome)' +
+                              '</option>';
+
+        var nomesDeTurma = {};
+        var alunos = {};
+
+        function retornaTodosDados() {
+            retornaTodosAlunos();
+            //
+        }
+
+        function retornaTodosAlunos() {
+            var caminhoAlunoAlunos = '../../adm/alunos/get_aluno_alunos.php';
+
+            $.get(caminhoAlunoAlunos, { filtro: '' })
+                .done(function(todosAlunos) {
+                    alunos = JSON.parse(todosAlunos);
+                    retornaTodosNomesDeTurma();
+                });
+        }
+
+        function retornaTodosNomesDeTurma() {
+            var caminhoTurmaTurmas = '../../adm/nomesTurma/get_nome_nomes_turma.php';
+
+            $.get(caminhoTurmaTurmas, { filtro: '' })
+                .done(function(todosNomesDeTurma) {
+                    nomesDeTurma = JSON.parse(todosNomesDeTurma);
+                    adicionaOptions();
+                });
+        }
+
+        function adicionaOptions() {
+            var selectNomeTurma = [];
+            var selectAluno = [];
+
+            // Iterador dos Alunos
+            for(var i = 0; i < alunos.length; i++) {
+                var iterador = alunos[i];
+
+                selectAluno.push(optionAluno
+                    .replace(/@cod/g, iterador.codigo)
+                    .replace('@nomeCompleto', iterador.nomeCompleto)
+                );
+
+                $('#sel-cod-aluno').append(selectAluno[i]);
+            }
+
+            // Iterador dos NomesDeTurma
+            for(var i = 0; i < nomesDeTurma.length; i++) {
+                var iterador = nomesDeTurma[i];
+
+                selectNomeTurma.push(optionNomeTurma
+                    .replace(/@cod/g, iterador.codigo)
+                    .replace('@nome', iterador.nome)
+                );
+
+                $('#sel-cod-nome-turma').append(selectNomeTurma[i]);
+            }
+        }
+
+        function inserePresenca(form, ev) {
+            ev.preventDefault();
+
+            var dia = form[0].value
+            var codAluno = form[1].value;
+            var codNomeTurma = form[2].value;
+
+            $.post(
+                'insere_presenca_script.php', {
+                    dia: dia,
+                    codAluno: codAluno,
+                    codNomeTurma: codNomeTurma
+                }, trataResposta
+            );
+        }
+
+        function trataResposta(retorno) {
+            if(retorno == '1') {
+                alert('Presença criada com Sucesso!');
+                document.forms[0].reset();
+                window.location.href = 'index.php';
+
+            } else
+                alert('Erro ao criar Presença! Por favor, tente novamente mais tarde.');
+        }
+
+        $(function() {
+            retornaTodosDados();
+        });
+    </script>
+</body>
+</html>
