@@ -84,14 +84,18 @@ class Deus {
             session_start();
 
             $_SESSION["validacao"] = "aluno";
+            
             $_SESSION["nome_completo"] = $array["nomeCompleto"];
             $_SESSION["sexo"] = $array["sexo"];
-            $_SESSION["email"] = $array["email"];
-            $_SESSION["senha"] = $array["senha"];
+
             $_SESSION["celular"] = $array["telefoneCelular"];
             $_SESSION["fixo"] = $array["telefoneFixo"];
+
             $_SESSION["rg"] = $array["rg"];
             $_SESSION["cpf"] = $array["cpf"];
+
+            $_SESSION["email"] = $array["email"];
+            $_SESSION["senha"] = $array["senha"];
 
             session_write_close();
             header("Location: ../index.php");

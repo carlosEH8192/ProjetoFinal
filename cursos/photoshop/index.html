@@ -4,21 +4,22 @@
 	<title>Adobe Photoshop®</title>
 	<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/ProjetoFinalGit/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/ProjetoFinalGit/img/adjust.css" />
-    <link rel="stylesheet" href="/ProjetoFinalGit/colors/colors.css" />
-    <link rel="stylesheet" type="text/css" href="/ProjetoFinalGit/img/logo/logo-adjust.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="<?= $bootstrap_css; ?>" />
+    <link rel="stylesheet" href="<?= $adjust; ?>" />
+    <link rel="stylesheet" href="<?= $colors; ?>" />
+    <link rel="stylesheet" href="<?= $icones; ?>" />
+    <link rel="stylesheet" type="<?= $logo_adjust; ?>" />
 </head>
-<body background="/ProjetoFinalGit/img/background.png">
+<body background="<?= $background; ?>">
 	<!-- CABEÇALHO (ISOLADO EM PHP) -->
     <?php
-        include_once("../../defaultNavs/cb_nav.php");
+        include_once($cb_nav);
     ?>
     
     <div class="col-xs-6 col-md-3">
         <img class="img-responsive logo-curso" 
-                 src="/ProjetoFinalGit/img/logo/curso-1.png" alt="curso-1.png">
+             src="/ProjetoFinalGit/img/logo/curso-1.png"
+             alt="curso-1.png" />
     </div>
 
     <img class="img-responsive" src="/ProjetoFinalGit/img/cursos/img-1.png"
@@ -64,10 +65,10 @@
 
     <!-- RODAPÉ (ISOLADO EM PHP) -->
     <?php
-        include_once("../../defaultNavs/ft_nav.php");
+        include_once($ft_nav);
     ?>
 
-    <script src="../../bootstrap/jquery/jquery.min.js"></script>
-    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?= $jquery; ?>"></script>
+    <script src="<?= $bootstrap_js; ?>"></script>
 </body>
 </html>

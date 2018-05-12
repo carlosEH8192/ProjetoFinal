@@ -1,24 +1,20 @@
-<?php // => /defaultNavs/cb_nav.php
-    // CAMINHO ROOT USADO NO HTML
-    const ROOT_HTML = "/ProjetoFinalGit";
+<?php // => /defaultNavs/cb_nav.php    
+    // CAMINHOS PARA HTML
+    $cb_logo = ROOT_HTML."/img/logo/cb-am.png";
+    $inicio = ROOT_HTML."/index.php";
 
-    // CAMINHO ROOT USADO PARA INCLUIR ARQUIVOS (PHP)
-    const ROOT_INC = "ProjetoFinalGit";
+    $cursos = ROOT_HTML."/cursos";
+    $photoshop = $cursos."/photoshop/index.php";
+    $corel = $cursos."/corelDraw/index.php";
+    $dsmax = $cursos."/3dsMax/index.php";
+    $inf_bsc = $cursos."/informaticaBasica/index.php";
 
-    const CB_LOGO = ROOT_HTML."/img/logo/cb-am.png";
-    const INICIO = ROOT_HTML."/index.php";
+    $quemsomos = ROOT_HTML."/quemSomos/index.php";
+    $contato = ROOT_HTML."/contato/index.php";
+    $cadastro = ROOT_HTML."/cadastro/index.php";
 
-    const CURSOS = ROOT_HTML."/cursos";    
-    const PHOTOSHOP = CURSOS."/photoshop/index.php";
-    const COREL = CURSOS."/corelDraw/index.php";
-    const DSMAX = CURSOS."/3dsMax/index.php";
-    const INF_BSC = CURSOS."/informaticaBasica/index.php";
-
-    const QUEMSOMOS = ROOT_HTML."/quemSomos/index.php";
-    const CONTATO = ROOT_HTML."/contato/index.php";
-    const CADASTRO = ROOT_HTML."/cadastro/index.php";
-
-    const LOGIN_NAV_OVRD = ROOT_INC."/defaultNavs/loginNavOvrd";
+    // CAMINHO PARA INCLUDE
+    $login_nav_ovrd = "defaultNavs/loginNavOvrd";
 
     $ss_estado = session_status();
     $ss_ativa = $ss_estado == PHP_SESSION_ACTIVE;
@@ -37,14 +33,20 @@
         $_SESSION["validacao"] == "aluno";
     
     if($validacao_existe_eh_aluno) {
-        $logged_in_nav = LOGIN_NAV_OVRD."/logged_in_nav.html";
+        // VARIÁVEL INCLUDE PARA CB_NAV LOGADO
+        $logged_in_nav = $login_nav_ovrd."/logged_in_nav.html";
+
+        // VARIÁVEL HTML PARA CB_NAV LOGADO
         $logout = ROOT_HTML."/logout/index.php";
         
         $primeiro_nome = explode(' ', $_SESSION["nome_completo"]);
         $primeiro_nome = $primeiro_nome[0];
 
     } else {
-        $def_login_nav = LOGIN_NAV_OVRD."/def_login_nav.html";
+        // VARIÁVEL INCLUDE PARA CB_NAV DEFAULT
+        $def_login_nav = $login_nav_ovrd."/def_login_nav.html";
+        
+        // VARIÁVEL HTML PARA CB_NAV DEFAULT
         $login = ROOT_HTML."/login/index.php";
 
         $validacao_existe_eh_adm_login =
@@ -66,6 +68,5 @@
         }
     }
 
-    set_include_path($_SERVER["DOCUMENT_ROOT"]."/");
     include_once("cb_nav.html");
 ?>

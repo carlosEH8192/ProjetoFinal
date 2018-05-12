@@ -17,4 +17,4 @@ function preencheCampos(data) {
     $("#inp-senha").val(aluno.senha);
 }
 
-$(document).ready(getDadosAluno);
+$(getDadosAluno);

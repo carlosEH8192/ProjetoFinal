@@ -1,5 +1,6 @@
 <?php // => /login/loga_adm.php
-    include_once("../deus/Deus.php");
+    set_include_path($_SERVER["DOCUMENT_ROOT"]."/ProjetoFinalGit/");
+    include_once("deus/Deus.php");
     $deus = new Deus();
 
     $username = $_POST["username"];

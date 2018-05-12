@@ -1,5 +1,6 @@
 <?php // => /cadastro/verifica_cpf.php
-    include_once("../deus/Deus.php");
+    set_include_path($_SERVER["DOCUMENT_ROOT"]."/ProjetoFinalGit/");    
+    include_once("deus/Deus.php");
     $deus = new Deus();
 
     $cpf = $_POST["cpf"];
