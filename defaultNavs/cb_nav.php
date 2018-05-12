@@ -66,6 +66,6 @@
         }
     }
 
-    set_include_path("C:/htdocs/");
+    set_include_path($_SERVER["DOCUMENT_ROOT"]."/");
     include_once("cb_nav.html");
 ?>
